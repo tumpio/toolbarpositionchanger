@@ -41,7 +41,7 @@
         <em:name>Toolbar Position Changer</em:name>
         <em:description>An addon to change toolbar positions with drag and drop.</em:description>
         <em:creator>Tumpio</em:creator>
-        <em:homepageURL>https://addons.mozilla.org/addon/drag-toolbars</em:homepageURL>
+        <em:homepageURL>https://github.com/tumpio/toolbarpositionchanger</em:homepageURL>
 
         <!-- Localizations -->
         <!-- example
