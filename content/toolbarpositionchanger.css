@@ -74,7 +74,8 @@
     #main-window[notificationbarOnBottom] notificationbox:not([dir="reverse"]) > .notificationbox-stack {
         -moz-box-ordinal-group: 2 !important;
     }
-    #main-window[notificationbarOnBottom] notificationbox:not([dir="reverse"]) .outset {
+    #main-window[notificationbarOnBottom] notificationbox:not([dir="reverse"]) .outset,
+    #main-window[notificationbarOnBottom] notificationbox:not([dir="reverse"]) > notification {
         border-bottom: none !important;
         border-top: 1px solid threedshadow !important;
     }
