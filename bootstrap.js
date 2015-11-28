@@ -15,7 +15,9 @@
     along with Toolbar Position Changer.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cu = Components.utils;
 
 function startup(aData, aReason) {
     Cu.import("chrome://toolbarpositionchanger/content/main.jsm");
@@ -28,11 +30,29 @@ function shutdown(aData, aReason) {
     // Flush localized strings stringbundle
     let stringBundleService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
     stringBundleService.flushBundles();
+    // Unload modules
+    Cu.unload("chrome://toolbarpositionchanger/content/main.jsm");
+    Cu.unload("chrome://toolbarpositionchanger/content/observer.jsm");
+    Cu.unload("chrome://toolbarpositionchanger/content/prefs.jsm");
+    Cu.unload("chrome://toolbarpositionchanger/content/toolbardraghandler.jsm");
 }
 
 function install(aData, aReason) {
+    // Save initial toolbar state on addon install
     if (aReason == ADDON_INSTALL) {
-        ToolbarPositionChanger.init();
+        let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+        let window = wm.getMostRecentWindow("navigator:browser");
+        let prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
+        let positions = {};
+        let toolbars = window.document.querySelectorAll(
+            "#navigator-toolbox > toolbar, #browser-bottombox > toolbar");
+        for (let toolbar of toolbars) {
+            let id = toolbar.parentNode.id;
+            if (!positions[id])
+                positions[id] = [];
+            positions[id].push(toolbar.id);
+        }
+        prefs.setCharPref("extensions.toolbarpositionchanger.initialState", JSON.stringify(positions));
     }
 }
 

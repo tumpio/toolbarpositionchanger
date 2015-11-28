@@ -490,12 +490,6 @@ let ToolbarPositionChanger = (function () {
     };
 
     return {
-        init: function () {
-            let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
-            let window = wm.getMostRecentWindow("navigator:browser");
-            myPrefmanager.setPref("initialState", toolbarPositions(window));
-        },
-
         load: function () {
             forAllWindows(loadIntoWindow);
             let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
