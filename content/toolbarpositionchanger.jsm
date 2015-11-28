@@ -501,7 +501,7 @@ let ToolbarPositionChanger = (function () {
                 .getService(Components.interfaces.nsIStyleSheetService);
             let ios = Components.classes["@mozilla.org/network/io-service;1"]
                 .getService(Components.interfaces.nsIIOService);
-            let uri = ios.newURI("chrome://toolbarpositionchanger/content/main.css", null, null);
+            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null, null);
             if (!sss.sheetRegistered(uri, sss.USER_SHEET))
                 sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
         },
@@ -517,7 +517,7 @@ let ToolbarPositionChanger = (function () {
                 .getService(Components.interfaces.nsIStyleSheetService);
             let ios = Components.classes["@mozilla.org/network/io-service;1"]
                 .getService(Components.interfaces.nsIIOService);
-            let uri = ios.newURI("chrome://toolbarpositionchanger/content/main.css", null, null);
+            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null, null);
             if (sss.sheetRegistered(uri, sss.USER_SHEET))
                 sss.unregisterSheet(uri, sss.USER_SHEET);
         }

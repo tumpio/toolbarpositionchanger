@@ -20,7 +20,7 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 function startup(aData, aReason) {
-    Cu.import("chrome://toolbarpositionchanger/content/main.jsm");
+    Cu.import("chrome://toolbarpositionchanger/content/toolbarpositionchanger.jsm");
     ToolbarPositionChanger.load();
 }
 
@@ -31,7 +31,7 @@ function shutdown(aData, aReason) {
     let stringBundleService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
     stringBundleService.flushBundles();
     // Unload modules
-    Cu.unload("chrome://toolbarpositionchanger/content/main.jsm");
+    Cu.unload("chrome://toolbarpositionchanger/content/toolbarpositionchanger.jsm");
     Cu.unload("chrome://toolbarpositionchanger/content/observer.jsm");
     Cu.unload("chrome://toolbarpositionchanger/content/prefs.jsm");
     Cu.unload("chrome://toolbarpositionchanger/content/toolbardraghandler.jsm");
