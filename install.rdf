@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+    <Description about="urn:mozilla:install-manifest">
+        <em:id>toolbarpositionchanger@tumpio.addons.mozilla.org</em:id>
+        <em:version>0.0.1</em:version>
+        <em:type>2</em:type>
+        <em:bootstrap>true</em:bootstrap>
+        <em:unpack>false</em:unpack>
+        <em:multiprocessCompatible>true</em:multiprocessCompatible>
+
+        <!-- Firefox -->
+        <em:targetApplication>
+            <Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>38.0</em:minVersion>
+                <em:maxVersion>44.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+
+        <!-- Thunderbird
+        <em:targetApplication>
+            <Description>
+                <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+                <em:minVersion>13.0</em:minVersion>
+                <em:maxVersion>35.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+        -->
+        <!-- SeaMonkey
+        <em:targetApplication>
+            <Description>
+                <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+                <em:minVersion>0</em:minVersion>
+                <em:maxVersion>35.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+        -->
+        <!-- Front End MetaData -->
+        <em:name>Toolbar Position Changer</em:name>
+        <em:description>An addon to change toolbar positions with drag and drop.</em:description>
+        <em:creator>Tumpio</em:creator>
+        <em:homepageURL>https://addons.mozilla.org/addon/drag-toolbars</em:homepageURL>
+
+        <!-- Localizations -->
+        <!-- example
+        <em:localized>
+            <Description>
+                <em:locale>en-US</em:locale>
+                <em:name>Toolbar Position Changer</em:name>
+                <em:description>An addon to change toolbar positions with drag and drop.</em:description>
+                <em:translator>Translator name/contact info</em:translator>
+            </Description>
+        </em:localized>
+        -->
+
+    </Description>
+</RDF>

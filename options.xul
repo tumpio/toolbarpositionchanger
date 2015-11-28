@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<!DOCTYPE options SYSTEM "chrome://toolbarpositionchanger/locale/options.dtd">
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <setting type="bool" pref="extensions.toolbarpositionchanger.invertedTabBackground" title="&options.invert.label;" />
+    <setting type="bool" pref="extensions.toolbarpositionchanger.notificationbarOnBottom" title="&options.notification.label;" />
+</vbox>

@@ -1,0 +1,2 @@
+#!/bin/bash
+. generateXPI.bat

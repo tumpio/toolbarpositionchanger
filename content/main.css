@@ -1,0 +1,204 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@-moz-document url(chrome://browser/content/browser.xul) {
+    /*
+      Inverted tab backgrounds
+    */
+    #TabsToolbar[invertedTabBackground] .tab-background {
+        transform: scaleY(-1);
+    }
+    #TabsToolbar:not([invertedTabBackground]) {
+        padding-top: 3px!important;
+    }
+    #TabsToolbar[invertedTabBackground] {
+        padding-bottom: 3px!important;
+    }
+    #navigator-toolbox > #TabsToolbar:last-child:not([invertedTabBackground]):not([customizing]) .tabbrowser-tab[selected] {
+        margin-bottom: -1px!important;
+    }
+    #browser-bottombox > #TabsToolbar[invertedTabBackground]:not([customizing]) .tabbrowser-tab[selected] {
+        margin-top: -1px!important;
+    }
+    .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
+        overflow: visible;
+    }
+    /*
+      For toolbar drag and drop
+    */
+    .toolbardrag-grip {
+        cursor: grab;
+    }
+    toolbar[brighttext] > .toolbardrag-grip {
+        color: white!important;
+        text-shadow: 0 0 1px rgba(0, 0, 0, .7), 0 1px 1.5px rgba(0, 0, 0, .5)!important;
+    }
+    .toolbardrag-grip > label {
+        pointer-events: none;
+    }
+    toolbar[customizing] {
+        margin: 0!important;
+        padding-left: 6px!important;
+        background-color: rgb(236, 236, 236);
+        -moz-appearance: none!important;
+        background-clip: padding-box;
+        border-width: 0!important;
+        transition: opacity .6s ease-out!important;
+    }
+    toolbar[dragged] {
+        opacity: 0.4;
+        transition: opacity .2s ease-in!important;
+    }
+    toolbar[dragover] {
+        border-style: solid!important;
+        border-color: rgba(255, 255, 255, 0.4)!important;
+    }
+    toolbar[dragover="top"] {
+        border-top-width: 4px!important;
+    }
+    toolbar[dragover="bottom"] {
+        border-bottom-width: 4px!important;
+    }
+    #navigator-toolbox[toolbar-dragged] > toolbar[customizing] *,
+    #browser-bottombox[toolbar-dragged] > toolbar[customizing] * {
+        pointer-events: none!important;
+    }
+    /* Drop areas */
+    #main-window[customize-entered] #navigator-toolbox,
+    #main-window[customize-entered] #browser-bottombox {
+        min-height: 19px;
+        -moz-appearance: none;
+        background-color: rgba(247, 247, 247, 0.4)!important;
+    }
+    /*
+      Setting to move notification bar to bottom
+    */
+    #main-window[notificationbarOnBottom] notificationbox:not([dir="reverse"]) > .notificationbox-stack {
+        -moz-box-ordinal-group: 2 !important;
+    }
+    #main-window[notificationbarOnBottom] notificationbox:not([dir="reverse"]) .outset {
+        border-bottom: none !important;
+        border-top: 1px solid threedshadow !important;
+    }
+    /*
+       For Windows
+    */
+    @media (-moz-windows-theme) {
+        /* Hide window controls if navigator toolbox has no visible toolbars */
+        #main-window[tabsintitlebar="true"][sizemode="maximized"][chromemargin="0,2,2,2"][windowcontrolshidden] {
+            -moz-appearance: menubar !important;
+        }
+        #main-window[tabsintitlebar="true"][sizemode="maximized"][chromemargin="0,2,2,2"][windowcontrolshidden] #titlebar-buttonbox-container {
+            display: none !important;
+        }
+        /* Show "title-bar" when window is not maximized */
+        #main-window[tabsintitlebar="true"][sizemode="normal"][chromemargin="0,2,2,2"][windowcontrolshidden]:not([customize-entered]) #navigator-toolbox {
+            min-height: 32px!important;
+        }
+        /* Remove obscure margin top on menubar when window is not maximized */
+        #main-window[sizemode="normal"] #toolbar-menubar {
+            margin-top: 0!important;
+        }
+    }
+    /*
+       Fixing
+    */
+    /* Fix TabsToolbar to not have margin-top when window state is normal
+       if it is not the first visible toolbar or if tab backgrounds are inverted.
+    */
+    #navigator-toolbox > toolbar:not([collapsed="true"]):not([autohide="true"]) ~ #TabsToolbar,
+    #TabsToolbar[invertedTabBackground] {
+        margin-top: 0!important;
+    }
+    /* Fix titlebar-placeholder to be visible only for the first visible toolbar
+       main.js adds placeholders to each toolbar */
+    #navigator-toolbox > toolbar:not([collapsed="true"]):not([autohide="true"]):not(#addon-bar) ~ toolbar > .titlebar-placeholder,
+    #browser-bottombox > toolbar > .titlebar-placeholder,
+    #main-window[customize-entered] .titlebar-placeholder {
+        display: none!important;
+    }
+    .titlebar-placeholder {
+        margin-left: 0!important;
+    }
+    /* Fix and adjust customize mode */
+    #customization-container,
+    #customization-panel-container {
+        background: transparent!important;
+    }
+    #customization-container {
+        border-left-width: 0!important;
+        border-right-width: 0!important;
+    }
+    #customization-panel-container {
+        padding: 0 0 0 1em!important;
+    }
+    #customization-palette-container {
+        background-color: rgb(247, 247, 247);
+        box-shadow: 0px 0px 4px rgba(24, 25, 26, 0.2);
+    }
+    #main-window[customize-entered]:not([lwtheme]) #browser-panel {
+        background-image: url("chrome://browser/skin/customizableui/customizeMode-separatorHorizontal.png"), url("chrome://browser/skin/customizableui/customizeMode-separatorVertical.png"), url("chrome://browser/skin/customizableui/customizeMode-gridTexture.png"), url("chrome://browser/skin/customizableui/background-noise-toolbar.png"), linear-gradient(to bottom, rgb(62, 134, 206), rgb(56, 120, 186));
+        background-position: center top, left center, left top, left top, left top;
+        background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
+        background-size: auto 12px, 12px 100%, auto auto, auto auto, auto auto;
+        background-attachment: scroll, scroll, fixed, fixed, scroll;
+    }
+    #main-window[customize-entered] #navigator-toolbox {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        box-shadow: 0px 0px 4px rgba(24, 25, 26, 0.2);
+    }
+    #main-window[customize-entered] #browser-bottombox {
+        margin-bottom: 2em;
+        margin-top: 1em;
+    }
+    #navigator-toolbox {
+        transition-property: margin-top, margin-left, margin-right!important;
+    }
+    #browser-bottombox {
+        transition-property: margin-bottom, margin-left, margin-right!important;
+    }
+    #main-window[customize-entered] #browser-bottombox {
+        border-top: 1px solid hsla(209, 67%, 12%, 0.35)!important;
+    }
+    /* Fix browser-bottombox to include same rules as navigator-toolbox */
+    #browser-bottombox {
+        -moz-appearance: none!important;
+        background-color: transparent!important;
+        border-top: none!important;
+    }
+    #browser-bottombox > toolbar {
+        -moz-appearance: none!important;
+    }
+    #browser-bottombox > toolbar:not([customizing]) {
+        border-style: none!important;
+    }
+    #browser-bottombox > toolbar:not(#toolbar-menubar):not(#TabsToolbar):not(:-moz-lwtheme) {
+        background-color: -moz-Dialog!important;
+    }
+    #browser-bottombox > toolbar:not(#toolbar-menubar):not(#TabsToolbar):not(#nav-bar):not(#addon-bar) {
+        overflow: -moz-hidden-unscrollable!important;
+        max-height: 4em!important;
+        transition: min-height 170ms ease-out, max-height 170ms ease-out!important;
+    }
+    #browser-bottombox > toolbar:not(#toolbar-menubar):not(#TabsToolbar):not(#nav-bar):not(#addon-bar)[collapsed=true] {
+        min-height: 0.1px!important;
+        max-height: 0!important;
+        transition: min-height 170ms ease-out, max-height 170ms ease-out, visibility 170ms linear!important;
+    }
+    #browser-bottombox::before {
+        content: "";
+        display: -moz-box;
+        -moz-box-ordinal-group: 0;
+        height: 1px;
+        background-color: ThreeDShadow;
+    }
+    #main-window[inFullscreen][inDOMFullscreen] #browser-bottombox {
+        visibility: collapse;
+    }
+    /* Fix menubar autohide to work in bottombox in customize mode */
+    #toolbar-menubar[autohide="true"][customizing] {
+        min-height: 0 !important;
+        height: 0 !important;
+        -moz-appearance: none !important;
+        border-style: none !important;
+    }
+}
