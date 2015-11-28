@@ -1,2 +1,3 @@
 content		toolbarpositionchanger	content/
-locale toolbarpositionchanger en-US   locale/en-US/
+locale toolbarpositionchanger en-US locale/en-US/
+locale toolbarpositionchanger fi    locale/fi/
