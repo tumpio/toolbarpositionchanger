@@ -384,8 +384,8 @@ let ToolbarPositionChanger = (function () {
 
     function onFullscreen(event) {
         let window = event.currentTarget;
-        let prefsService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
-        let autohide = prefservice.getBoolPref("browser.fullscreen.autohide");
+        let prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
+        let autohide = prefService.getBranch("browser.fullscreen.").getBoolPref("autohide");
         let bottombox = window.document.getElementById("browser-bottombox");
         let urlbar = bottombox.querySelector("#urlbar");
         let searchbar = bottombox.querySelector("#searchbar");
@@ -428,8 +428,8 @@ let ToolbarPositionChanger = (function () {
     }
 
     function onHideBottombox(event) {
-        let prefsService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
-        hideBottombox(event.currentTarget, prefservice.getBoolPref("browser.fullscreen.autohide"));
+        let prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
+        hideBottombox(event.currentTarget, prefService.getBranch("browser.fullscreen.").getBoolPref("autohide"));
     }
 
     function onFocusNavbar(event) {
