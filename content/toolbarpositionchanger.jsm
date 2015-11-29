@@ -33,7 +33,7 @@ let ToolbarPositionChanger = (function () {
         function (branch, name) {
             switch (name) {
                 case "state":
-                    forAllWindows(loadState);
+                    forAllWindows(loadSavedState);
                     break;
                 case "invertedTabBackground":
                     forAllWindows(invertTabBackground);
@@ -240,29 +240,45 @@ let ToolbarPositionChanger = (function () {
 
     function loadSavedState(window) {
         let state = myPrefmanager.getPref("state");
-        if (!state) state = myPrefmanager.getPref("initialState");
-        if (!state) return;
-        loadState(window, state);
+        if (state) {
+            loadState(window, state);
+        } else {
+            loadInitialState(window)
+        }
     }
 
     function loadInitialState(window) {
         let state = myPrefmanager.getPref("initialState");
-        if (!state) return;
         loadState(window, state);
     }
 
     function loadState(window, state) {
-        let stateObj = JSON.parse(state);
+        let stateObj = tryParseJSON(state);
+
+        if (!stateObj)
+            return;
+
         for (let key in stateObj) {
             let toolbox = window.document.getElementById(key);
-            if (!toolbox) continue;
+            if (!toolbox || (toolbox.id != "navigator-toolbox" && toolbox.id != "browser-bottombox"))
+                continue;
             for (let id of stateObj[key]) {
                 let toolbar = window.document.getElementById(id);
-                if (!toolbox) continue;
+                if (!toolbar || toolbar.localName != "toolbar") continue;
                 toolbox.appendChild(toolbar);
             }
         }
     }
+
+    function tryParseJSON(str) {
+        try {
+            let o = JSON.parse(str);
+            if (o && typeof o === "object") {
+                return o;
+            }
+        } catch (e) {}
+        return false;
+    };
 
     function saveState(window) {
         myPrefmanager.setPref("state", toolbarPositions(window));
@@ -501,7 +517,8 @@ let ToolbarPositionChanger = (function () {
                 .getService(Components.interfaces.nsIStyleSheetService);
             let ios = Components.classes["@mozilla.org/network/io-service;1"]
                 .getService(Components.interfaces.nsIIOService);
-            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null, null);
+            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null,
+                null);
             if (!sss.sheetRegistered(uri, sss.USER_SHEET))
                 sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
         },
@@ -517,7 +534,8 @@ let ToolbarPositionChanger = (function () {
                 .getService(Components.interfaces.nsIStyleSheetService);
             let ios = Components.classes["@mozilla.org/network/io-service;1"]
                 .getService(Components.interfaces.nsIIOService);
-            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null, null);
+            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null,
+                null);
             if (sss.sheetRegistered(uri, sss.USER_SHEET))
                 sss.unregisterSheet(uri, sss.USER_SHEET);
         }
