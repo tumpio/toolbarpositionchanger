@@ -53,6 +53,10 @@ let ToolbarPositionChanger = (function () {
         }
     );
 
+
+    let myTimer = Components.classes["@mozilla.org/timer;1"]
+        .createInstance(Ci.nsITimer);
+
     function forAllWindows(callback) {
         let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
         let enumerator = wm.getEnumerator("navigator:browser");
@@ -158,8 +162,8 @@ let ToolbarPositionChanger = (function () {
 
     function restoreDefaultSettings(event) {
         undoableSettings["state"] = myPrefmanager.getPref("state");
-        undoableSettings["invert"] = myPrefmanager.getPref("invertedTabBackground");
-        undoableSettings["notification"] = myPrefmanager.getPref("notificationbarOnBottom");
+        undoableSettings["invertedTabBackground"] = myPrefmanager.getPref("invertedTabBackground");
+        undoableSettings["notificationbarOnBottom"] = myPrefmanager.getPref("notificationbarOnBottom");
         myPrefmanager.restoreDefaults(["state", "invertedTabBackground", "notificationbarOnBottom"]);
     }
 
@@ -168,6 +172,14 @@ let ToolbarPositionChanger = (function () {
             myPrefmanager.setPref(pref, undoableSettings[pref]);
         }
         undoableSettings = {};
+        let resetButton = event.currentTarget.parentNode.querySelector(
+            "#customization-reset-button");
+        // Timer to wait after undo disables reset button
+        myTimer.initWithCallback({
+            notify: function () {
+                enableResetButton(resetButton);
+            }
+        }, 500, Ci.nsITimer.TYPE_ONE_SHOT);
     }
 
     function appendMethod(object, method, append) {
@@ -271,12 +283,31 @@ let ToolbarPositionChanger = (function () {
 
     function saveState(event) {
         let window = event.currentTarget;
+        let resetButton = window.document.getElementById("customization-reset-button");
         myPrefmanager.setPref("state", toolbarPositions(window));
+        enableResetButton(resetButton);
     }
 
     function customizationStart(event) {
         let window = event.currentTarget;
+        let resetButton = window.document.getElementById("customization-reset-button");
         ToolbarDragHandler.load(window);
+        // Timer to wait customize mode enter animation delay
+        myTimer.initWithCallback({
+            notify: function () {
+                enableResetButton(resetButton)
+            }
+        }, 1000, Ci.nsITimer.TYPE_ONE_SHOT);
+    }
+
+    function enableResetButton(button) {
+        let state = myPrefmanager.getPref("state");
+        let initialState = myPrefmanager.getPref("intialState");
+        if (state && state != initialState) {
+            if (button && button.hasAttribute("disabled")) {
+                button.removeAttribute("disabled");
+            }
+        }
     }
 
     function customizationEnd(event) {
@@ -321,12 +352,8 @@ let ToolbarPositionChanger = (function () {
     function afterToolbarToggled(event) {
         if (!event.target.id.startsWith("toggle"))
             return;
-
-        let timer = Components.classes["@mozilla.org/timer;1"]
-            .createInstance(Ci.nsITimer);
-
-        // Needs timer to wait toolbar animation delay
-        timer.initWithCallback({
+        // Timer to wait toolbar toggle animation delay
+        myTimer.initWithCallback({
             notify: function () {
                 forAllWindows(toggleWindowControls);
             }
