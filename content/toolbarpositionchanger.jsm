@@ -28,6 +28,8 @@ Cu.import("resource://gre/modules/devtools/Console.jsm");
 
 let ToolbarPositionChanger = (function () {
 
+    var undoableSettings = {};
+
     let myPrefmanager = new PrefManager("extensions.toolbarpositionchanger.",
         "chrome://toolbarpositionchanger/content/defaultprefs.js",
         function (branch, name) {
@@ -155,16 +157,17 @@ let ToolbarPositionChanger = (function () {
     }
 
     function restoreDefaultSettings(event) {
-        let state = myPrefmanager.getPref("state");
-        let invert = myPrefmanager.getPref("invertedTabBackground");
-        let notification = myPrefmanager.getPref("notificationbarOnBottom");
-        addEventById(event.currentTarget, "customization-undo-reset-button", "click", function (e) {
-            myPrefmanager.setPref("state", state);
-            myPrefmanager.setPref("invertedTabBackground", invert);
-            myPrefmanager.setPref("notificationbarOnBottom", notification);
-            e.target.removeEventListener(e.type, arguments.callee);
-        });
+        undoableSettings["state"] = myPrefmanager.getPref("state");
+        undoableSettings["invert"] = myPrefmanager.getPref("invertedTabBackground");
+        undoableSettings["notification"] = myPrefmanager.getPref("notificationbarOnBottom");
         myPrefmanager.restoreDefaults(["state", "invertedTabBackground", "notificationbarOnBottom"]);
+    }
+
+    function undoSettings(event) {
+        for (let pref in undoableSettings) {
+            myPrefmanager.setPref(pref, undoableSettings[pref]);
+        }
+        undoableSettings = {};
     }
 
     function appendMethod(object, method, append) {
@@ -182,20 +185,6 @@ let ToolbarPositionChanger = (function () {
         if (object[original]) {
             object[method] = object[original];
             delete object[original];
-        }
-    }
-
-    function addEventById(window, id, event_type, event_callback) {
-        let element = window.document.getElementById(id);
-        if (element) {
-            element.addEventListener(event_type, event_callback);
-        }
-    }
-
-    function removeEventById(window, id, type, callback) {
-        let element = window.document.getElementById(id);
-        if (element) {
-            element.addEventListener(type, callback);
         }
     }
 
@@ -430,7 +419,14 @@ let ToolbarPositionChanger = (function () {
         addOptionsMenu(window);
         invertTabBackground(window);
         notificationbarOnBottom(window);
-        addEventById(window, "customization-reset-button", "click", restoreDefaultSettings);
+        let resetButton = window.document.getElementById("customization-reset-button");
+        if (resetButton) {
+            resetButton.addEventListener("click", restoreDefaultSettings);
+        }
+        let undoButton = window.document.getElementById("customization-undo-reset-button");
+        if (undoButton) {
+            undoButton.addEventListener("click", undoSettings);
+        }
         appendMethod(window, "getTogglableToolbars", function (original) {
             let bottombox = window.document.getElementById("browser-bottombox");
             let toolbarNodes = Array.slice(bottombox.childNodes);
@@ -468,7 +464,14 @@ let ToolbarPositionChanger = (function () {
         ToolbarDragHandler.unload(window);
         window.removeEventListener("beforecustomization", customizationStart);
         window.removeEventListener("aftercustomization", customizationEnd);
-        removeEventById(window, "customization-reset-button", "click", restoreDefaultSettings);
+        let resetButton = window.document.getElementById("customization-reset-button");
+        if (resetButton) {
+            resetButton.removeEventListener("click", restoreDefaultSettings);
+        }
+        let undoButton = window.document.getElementById("customization-undo-reset-button");
+        if (undoButton) {
+            undoButton.removeEventListener("click", undoSettings);
+        }
         removeElementById(window, "customization-toolbar-settings-button");
         invertTabBackground(window, false);
         notificationbarOnBottom(window, false);
