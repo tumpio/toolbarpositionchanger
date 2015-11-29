@@ -269,16 +269,14 @@ let ToolbarPositionChanger = (function () {
         return false;
     };
 
-    function saveState(window) {
+    function saveState(event) {
+        let window = event.currentTarget;
         myPrefmanager.setPref("state", toolbarPositions(window));
     }
 
     function customizationStart(event) {
         let window = event.currentTarget;
         ToolbarDragHandler.load(window);
-        window.addEventListener("toolbarPositionChange", function (e) {
-            saveState(window);
-        });
     }
 
     function customizationEnd(event) {
@@ -416,6 +414,7 @@ let ToolbarPositionChanger = (function () {
         if (!window) return;
         window.addEventListener("beforecustomization", customizationStart);
         window.addEventListener("aftercustomization", customizationEnd);
+        window.addEventListener("toolbarPositionChange", saveState);
         addOptionsMenu(window);
         invertTabBackground(window);
         notificationbarOnBottom(window);
@@ -464,6 +463,7 @@ let ToolbarPositionChanger = (function () {
         ToolbarDragHandler.unload(window);
         window.removeEventListener("beforecustomization", customizationStart);
         window.removeEventListener("aftercustomization", customizationEnd);
+        window.removeEventListener("toolbarPositionChange", saveState);
         let resetButton = window.document.getElementById("customization-reset-button");
         if (resetButton) {
             resetButton.removeEventListener("click", restoreDefaultSettings);
