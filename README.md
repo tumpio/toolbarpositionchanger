@@ -8,6 +8,7 @@ A Firefox extension to change the vertical position of toolbars with drag and dr
 - Drop toolbars from top to bottom.
 - Option to invert tab backgrounds.
 - Option to show notification info toolbar on bottom.
+- Supports Customize mode Restore Defaults and Undo functionality.
 
 ## TODO:
 * Sync support
@@ -35,7 +36,7 @@ If you like my work, please considere to contribute (in any form). Thank you!
 tumpio [tumpio at sci.fi]
 
 
-# Licence
+## Licence
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
