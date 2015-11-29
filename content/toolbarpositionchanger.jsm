@@ -24,7 +24,7 @@ const Cu = Components.utils;
 Cu.import("chrome://toolbarpositionchanger/content/prefs.jsm");
 Cu.import("chrome://toolbarpositionchanger/content/toolbardraghandler.jsm");
 Cu.import("chrome://toolbarpositionchanger/content/observer.jsm");
-Cu.import("resource://gre/modules/devtools/Console.jsm");
+//Cu.import("resource://gre/modules/devtools/Console.jsm");
 
 let ToolbarPositionChanger = (function () {
 
