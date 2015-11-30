@@ -4,6 +4,10 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
     <Description about="urn:mozilla:install-manifest">
         <em:id>toolbarpositionchanger@tumpio.addons.mozilla.org</em:id>
+        <em:name>Toolbar Position Changer</em:name>
+        <em:description>An addon to change toolbar positions with drag and drop.</em:description>
+        <em:creator>Tumpio</em:creator>
+        <em:homepageURL>https://addons.mozilla.org/addon/toolbar-position-changer/</em:homepageURL>
         <em:version>0.1.2</em:version>
         <em:type>2</em:type>
         <em:bootstrap>true</em:bootstrap>
@@ -37,23 +41,24 @@
             </Description>
         </em:targetApplication>
         -->
-        <!-- Front End MetaData -->
-        <em:name>Toolbar Position Changer</em:name>
-        <em:description>An addon to change toolbar positions with drag and drop.</em:description>
-        <em:creator>Tumpio</em:creator>
-        <em:homepageURL>https://github.com/tumpio/toolbarpositionchanger</em:homepageURL>
 
         <!-- Localizations -->
-        <!-- example
         <em:localized>
             <Description>
                 <em:locale>en-US</em:locale>
                 <em:name>Toolbar Position Changer</em:name>
                 <em:description>An addon to change toolbar positions with drag and drop.</em:description>
-                <em:translator>Translator name/contact info</em:translator>
+                <em:translator>[en-US] Tumpio at https://addons.mozilla.org/</em:translator>
             </Description>
         </em:localized>
-        -->
+        <em:localized>
+            <Description>
+                <em:locale>fi</em:locale>
+                <em:name>Toolbar Position Changer</em:name>
+                <em:description>Lisäosa vaihtamaan työkalupalkkien sijainteja raahaamalla ja pudottamalla.</em:description>
+                <em:translator>[fi] mossu/Tumpio at https://www.babelzilla.org</em:translator>
+            </Description>
+        </em:localized>
 
     </Description>
 </RDF>
