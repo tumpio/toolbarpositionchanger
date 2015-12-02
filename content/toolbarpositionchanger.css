@@ -18,9 +18,6 @@
     #browser-bottombox > #TabsToolbar[invertedTabBackground]:not([customizing]) .tabbrowser-tab[selected] {
         margin-top: -1px!important;
     }
-    .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
-        overflow: visible;
-    }
     /*
       For toolbar drag and drop
     */
