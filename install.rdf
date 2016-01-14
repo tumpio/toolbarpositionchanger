@@ -48,15 +48,47 @@
                 <em:locale>en-US</em:locale>
                 <em:name>Toolbar Position Changer</em:name>
                 <em:description>An addon to change toolbar positions with drag and drop.</em:description>
-                <em:translator>[en-US] Tumpio at https://addons.mozilla.org/</em:translator>
+                <em:translator>[en-US] Tumpio at addons.mozilla.org</em:translator>
             </Description>
         </em:localized>
         <em:localized>
             <Description>
                 <em:locale>fi</em:locale>
                 <em:name>Toolbar Position Changer</em:name>
-                <em:description>Lisäosa vaihtamaan työkalupalkkien sijainteja raahaamalla ja pudottamalla.</em:description>
-                <em:translator>[fi] mossu/Tumpio at https://www.babelzilla.org</em:translator>
+                <em:description>Lisäosa työkalupalkkien sijaintien muuttamiseen raahaamalla ja pudottamalla.</em:description>
+                <em:translator>[fi] mossu/Tumpio at babelzilla.org</em:translator>
+            </Description>
+        </em:localized>
+        <em:localized>
+            <Description>
+                <em:locale>fr</em:locale>
+                <em:name>Toolbar Position Changer</em:name>
+                <em:description>Une extension qui permet de changer l'emplacement de la barre d'outils en glissant-déposant.</em:description>
+                <em:translator>[fr] Goofy at babelzilla.org</em:translator>
+            </Description>
+        </em:localized>
+        <em:localized>
+            <Description>
+                <em:locale>nl</em:locale>
+                <em:name>Toolbar Position Changer</em:name>
+                <em:description>Een add-on om werkbalkposities te wijzigen door te slepen.</em:description>
+                <em:translator>[nl] markh van BabelZilla.org</em:translator>
+            </Description>
+        </em:localized>
+        <em:localized>
+            <Description>
+                <em:locale>uk-UA</em:locale>
+                <em:name>Переміщення панелі інструментів</em:name>
+                <em:description>Додаток, що дозволяє змінювати положення панелі інструментів за допомогою звичайного перетягування.</em:description>
+                <em:translator>[uk-UA] Sappa</em:translator>
+            </Description>
+        </em:localized>
+        <em:localized>
+            <Description>
+                <em:locale>zh-CN</em:locale>
+                <em:name>Toolbar Position Changer</em:name>
+                <em:description>允许在“定制”中拖放更改工具栏的位置。</em:description>
+                <em:translator>[zh-CN] YFdyh000</em:translator>
             </Description>
         </em:localized>
 

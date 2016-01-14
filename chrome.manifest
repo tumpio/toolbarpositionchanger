@@ -1,3 +1,7 @@
-content		toolbarpositionchanger	content/
-locale toolbarpositionchanger en-US locale/en-US/
-locale toolbarpositionchanger fi    locale/fi/
+content     toolbarpositionchanger	         content/
+locale      toolbarpositionchanger en-US     locale/en-US/
+locale      toolbarpositionchanger fi        locale/fi/
+locale      toolbarpositionchanger fr        locale/fr/
+locale      toolbarpositionchanger nl        locale/nl/
+locale      toolbarpositionchanger uk-UA     locale/uk-UA/
+locale      toolbarpositionchanger zh-CN     locale/zh-CN/
