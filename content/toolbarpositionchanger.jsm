@@ -137,13 +137,13 @@ let ToolbarPositionChanger = (function () {
         let invertMenuitem = createElement(window, "menuitem", {
             "label": stringBundle.GetStringFromName("options_invert_label"),
             "id": "customization-tabbackground-invert-menuitem",
-            "accesskey": "I",
+            "accesskey": stringBundle.GetStringFromName("options_invert_label.accesskey"),
             "type": "checkbox"
         });
         let notificationbarMenuitem = createElement(window, "menuitem", {
             "label": stringBundle.GetStringFromName("options_notification_label"),
             "id": "customization-notificationbar-bottom-menuitem",
-            "accesskey": "S",
+            "accesskey": stringBundle.GetStringFromName("options_notification_label.accesskey"),
             "type": "checkbox"
         });
 
