@@ -1,0 +1,23 @@
+Toolbar Position Changer v0.2.1 (released 2016-01-15)
+    - Add locale: fr by Goofy at babelzilla.org
+    - Add locale: nl by markh van BabelZilla.org
+    - Add locale: uk-UA by Sappa
+    - Add locale: zh-CN by YFdyh000
+    - Localize access keys
+
+Toolbar Position Changer v0.2.0 (released 2015-12-03)
+    - Fix tabs overflow issue
+    - Improve localization support
+
+Toolbar Position Changer v0.1.2 (released 2015-11-29)
+    - Fix fullscreen handler
+
+Toolbar Position Changer v0.1.1 (released 2015-11-29)
+    - Disable loading console.jsm
+    - Enable Restore Defaults button when toolbar positions changed
+    - Remove toolbarPositionChange event on addon unload
+    - Fix restore default settings event and undo event
+    - Fix JSON parsing error handling on toolbar position state loading
+
+Toolbar Position Changer v0.1.0 (released 2015-11-28)
+    - Initial working release.
