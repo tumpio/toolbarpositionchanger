@@ -96,6 +96,15 @@
             margin-top: 0!important;
         }
     }
+    @media (-moz-windows-glass) {
+        /* Glass Fog */
+        #browser-bottombox > #TabsToolbar:not(:-moz-lwtheme)::after {
+          display:none!important;
+        }
+        #browser-bottombox:not(:-moz-lwtheme) {
+          overflow: -moz-hidden-unscrollable;
+        }
+    }
     /*
        Fixing
     */
