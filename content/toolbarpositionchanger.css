@@ -5,18 +5,8 @@
     */
     #TabsToolbar[invertedTabBackground] .tab-background {
         transform: scaleY(-1);
-    }
-    #TabsToolbar:not([invertedTabBackground]) {
-        padding-top: 3px!important;
-    }
-    #TabsToolbar[invertedTabBackground] {
-        padding-bottom: 3px!important;
-    }
-    #navigator-toolbox > #TabsToolbar:last-child:not([invertedTabBackground]):not([customizing]) .tabbrowser-tab[selected] {
-        margin-bottom: -1px!important;
-    }
-    #browser-bottombox > #TabsToolbar[invertedTabBackground]:not([customizing]) .tabbrowser-tab[selected] {
-        margin-top: -1px!important;
+        margin-top: -1px;
+        margin-bottom: 1px;
     }
     /*
       For toolbar drag and drop
@@ -191,12 +181,11 @@
         max-height: 0!important;
         transition: min-height 170ms ease-out, max-height 170ms ease-out, visibility 170ms linear!important;
     }
-    #browser-bottombox::before {
-        content: "";
-        display: -moz-box;
-        -moz-box-ordinal-group: 0;
-        height: 1px;
-        background-color: ThreeDShadow;
+    #browser-bottombox > #nav-bar {
+        border-top: 1px solid ThreeDShadow!important;
+    }
+    #browser-bottombox > toolbar:not([hidden]):not([collapsed]) ~ #nav-bar {
+        border-top: none!important;
     }
     #main-window[inFullscreen][inDOMFullscreen] #browser-bottombox {
         visibility: collapse;
