@@ -16,6 +16,7 @@ A Firefox extension to change the vertical position of toolbars with drag and dr
 ## Localization
 You can help to translate the extension! Localization is managed
 with [BabelZilla WTS](https://www.babelzilla.org/forum/index.php?showtopic=7682).
+
 Or if your are familiar with Git, you may submit locales by pull request.
 
 ## Other related extensions
