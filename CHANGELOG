@@ -1,3 +1,9 @@
+Toolbar Position Changer v0.2.2 (released 2016-02-28)
+    - Fix Windows glass fog on toolbars on bottom.
+    - Remove tabs toolbar extra padding.
+    - Remove extra border on bottom.
+    - Remove inline options, please use browser customize mode for the configuration.
+
 Toolbar Position Changer v0.2.1 (released 2016-01-15)
     - Add locale: fr by Goofy at babelzilla.org
     - Add locale: nl by markh van BabelZilla.org
