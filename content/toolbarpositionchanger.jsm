@@ -114,6 +114,18 @@ let ToolbarPositionChanger = (function () {
         }
     }
 
+    function setAutoCompletePanelFlip(window) {
+        let panel = window.document.getElementById("PopupAutoCompleteRichResult");
+        if (!panel) return;
+        panel.setAttribute("flip", "both");
+        if (window.document.querySelector(
+            "#browser-bottombox #urlbar")) {
+            panel.setAttribute("onbottombox", "true");
+        } else {
+            panel.removeAttribute("onbottombox");
+        }
+    }
+
     function addOptionsMenu(window) {
         let container = window.document.getElementById("customization-footer");
         let container_spacer = window.document.getElementById("customization-footer-spacer");
@@ -312,6 +324,7 @@ let ToolbarPositionChanger = (function () {
 
     function customizationEnd(event) {
         ToolbarDragHandler.unload(event.currentTarget);
+        setAutoCompletePanelFlip(event.currentTarget);
     }
 
     function addTitlebarPlaceholders(window) {
@@ -462,6 +475,7 @@ let ToolbarPositionChanger = (function () {
         addTitlebarPlaceholders(window);
         setBrighttextBottom(window);
         loadSavedState(window);
+        setAutoCompletePanelFlip(window);
 
         // If addon enabled when already in customization mode
         let mainWindow = window.document.getElementById("main-window");
