@@ -197,8 +197,4 @@
         -moz-appearance: none !important;
         border-style: none !important;
     }
-    /* Fix Autocomplete Search results panel margin in bottombox */
-    #PopupAutoCompleteRichResult[onbottombox] {
-        margin-top: 1em!important;
-    }
 }

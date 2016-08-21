@@ -24,7 +24,7 @@ const Cu = Components.utils;
 Cu.import("chrome://toolbarpositionchanger/content/prefs.jsm");
 Cu.import("chrome://toolbarpositionchanger/content/toolbardraghandler.jsm");
 Cu.import("chrome://toolbarpositionchanger/content/observer.jsm");
-//Cu.import("resource://gre/modules/devtools/Console.jsm");
+Cu.import("resource://gre/modules/devtools/Console.jsm");
 
 let ToolbarPositionChanger = (function () {
 
@@ -111,18 +111,6 @@ let ToolbarPositionChanger = (function () {
         } else {
             for (let toolbar of toolbars)
                 toolbar.removeAttribute("brighttext");
-        }
-    }
-
-    function setAutoCompletePanelFlip(window) {
-        let panel = window.document.getElementById("PopupAutoCompleteRichResult");
-        if (!panel) return;
-        panel.setAttribute("flip", "both");
-        if (window.document.querySelector(
-            "#browser-bottombox #urlbar")) {
-            panel.setAttribute("onbottombox", "true");
-        } else {
-            panel.removeAttribute("onbottombox");
         }
     }
 
@@ -324,7 +312,6 @@ let ToolbarPositionChanger = (function () {
 
     function customizationEnd(event) {
         ToolbarDragHandler.unload(event.currentTarget);
-        setAutoCompletePanelFlip(event.currentTarget);
     }
 
     function addTitlebarPlaceholders(window) {
@@ -475,7 +462,25 @@ let ToolbarPositionChanger = (function () {
         addTitlebarPlaceholders(window);
         setBrighttextBottom(window);
         loadSavedState(window);
-        setAutoCompletePanelFlip(window);
+        
+        // Fix autocomplete panel position when navbar on bottom (Fx +48)
+        let panel = window.document.getElementById("PopupAutoCompleteRichResult");
+        if (panel) {
+            panel.setAttribute("flip", "both");
+            
+            // Replace panel popup open method
+            panel._openAutocompletePopupOriginal = panel._openAutocompletePopup;
+            panel._openAutocompletePopup = function(aInput, aElement) {
+                panel._openAutocompletePopupOriginal(aInput, aElement);
+                // Check if navbar is on bottombox
+                let navbar = window.document.querySelector("#browser-bottombox #nav-bar");
+                let urlbar = window.document.querySelector("#browser-bottombox #urlbar");
+                if (navbar && urlbar) {
+                    // set margin-top to the offset of urlbar and navbar
+                    panel.style.marginTop = (navbar.getBoundingClientRect().height - urlbar.getBoundingClientRect().height) + "px";
+                }
+            };
+        }
 
         // If addon enabled when already in customization mode
         let mainWindow = window.document.getElementById("main-window");
@@ -519,6 +524,11 @@ let ToolbarPositionChanger = (function () {
         restoreMethod(window, "getTogglableToolbars");
         removeTitlebarPlaceholders(window);
         loadInitialState(window);
+        
+        let panel = window.document.getElementById("PopupAutoCompleteRichResult");
+        if (panel) {
+            restoreMethod(panel, "_openAutocompletePopup");
+        }
 
         // For Windows only
         let xulRuntime = Components.classes["@mozilla.org/xre/app-info;1"]
