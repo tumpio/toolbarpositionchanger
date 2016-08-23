@@ -263,10 +263,16 @@ let ToolbarPositionChanger = (function () {
             let toolbox = window.document.getElementById(key);
             if (!toolbox || (toolbox.id != "navigator-toolbox" && toolbox.id != "browser-bottombox"))
                 continue;
+            
+            /* Ensure compatibility with CTR addon
+                Any toolbars below CTRs "ctraddon_toolbar_dummy" toolbar
+                or the button and some other things will not work properly. */
+            let ctrtoolbar = toolbox.querySelector("#ctraddon_toolbar_dummy");
+            
             for (let id of stateObj[key]) {
                 let toolbar = window.document.getElementById(id);
                 if (!toolbar || toolbar.localName != "toolbar") continue;
-                toolbox.appendChild(toolbar);
+                toolbox.insertBefore(toolbar, ctrtoolbar);
             }
         }
     }
@@ -456,7 +462,9 @@ let ToolbarPositionChanger = (function () {
         appendMethod(window, "getTogglableToolbars", function (original) {
             let bottombox = window.document.getElementById("browser-bottombox");
             let toolbarNodes = Array.slice(bottombox.childNodes);
-            toolbarNodes = toolbarNodes.filter(node => node.getAttribute("toolbarname"));
+            toolbarNodes = toolbarNodes.filter(
+                node => node.getAttribute("toolbarname")
+                    && !node.id.startsWith("ctraddon"));
             return original.concat(toolbarNodes);
         });
         addTitlebarPlaceholders(window);
