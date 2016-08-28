@@ -24,7 +24,6 @@ const Cu = Components.utils;
 Cu.import("chrome://toolbarpositionchanger/content/prefs.jsm");
 Cu.import("chrome://toolbarpositionchanger/content/toolbardraghandler.jsm");
 Cu.import("chrome://toolbarpositionchanger/content/observer.jsm");
-Cu.import("resource://gre/modules/devtools/Console.jsm");
 
 let ToolbarPositionChanger = (function () {
 
@@ -53,7 +52,6 @@ let ToolbarPositionChanger = (function () {
         }
     );
 
-
     let myTimer = Components.classes["@mozilla.org/timer;1"]
         .createInstance(Ci.nsITimer);
 
@@ -68,7 +66,6 @@ let ToolbarPositionChanger = (function () {
 
     function invertTabBackground(window, opt) {
         let tabsToolbar = window.document.getElementById("TabsToolbar");
-        let checkbox = window.document.getElementById("customization-tabbackground-invert-menuitem");
 
         if (!tabsToolbar) return;
 
@@ -79,12 +76,10 @@ let ToolbarPositionChanger = (function () {
         } else {
             tabsToolbar.removeAttribute("invertedTabBackground");
         }
-        setCheckboxState(checkbox, option);
     }
 
     function notificationbarOnBottom(window, opt) {
         let mainwindow = window.document.getElementById("main-window");
-        let checkbox = window.document.getElementById("customization-notificationbar-bottom-menuitem");
 
         if (!mainwindow) return;
 
@@ -96,7 +91,6 @@ let ToolbarPositionChanger = (function () {
         } else {
             mainwindow.removeAttribute("notificationbarOnBottom");
         }
-        setCheckboxState(checkbox, option);
     }
 
     function setBrighttextBottom(window) {
@@ -112,52 +106,6 @@ let ToolbarPositionChanger = (function () {
             for (let toolbar of toolbars)
                 toolbar.removeAttribute("brighttext");
         }
-    }
-
-    function addOptionsMenu(window) {
-        let container = window.document.getElementById("customization-footer");
-        let container_spacer = window.document.getElementById("customization-footer-spacer");
-
-        let stringBundleService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
-        let stringBundle = stringBundleService.createBundle(
-            "chrome://toolbarpositionchanger/locale/strings.properties");
-
-        if (!container || !container_spacer)
-            return;
-
-        let menu = createElement(window, "button", {
-            "label": stringBundle.GetStringFromName("options_menu_label"),
-            "id": "customization-toolbar-settings-button",
-            "class": "customizationmode-button",
-            "type": "menu"
-        });
-        let menuPopup = createElement(window, "menupopup", {
-            "id": "customization-toolbar-settings-menu"
-        });
-        let invertMenuitem = createElement(window, "menuitem", {
-            "label": stringBundle.GetStringFromName("options_invert_label"),
-            "id": "customization-tabbackground-invert-menuitem",
-            "accesskey": stringBundle.GetStringFromName("options_invert_label.accesskey"),
-            "type": "checkbox"
-        });
-        let notificationbarMenuitem = createElement(window, "menuitem", {
-            "label": stringBundle.GetStringFromName("options_notification_label"),
-            "id": "customization-notificationbar-bottom-menuitem",
-            "accesskey": stringBundle.GetStringFromName("options_notification_label.accesskey"),
-            "type": "checkbox"
-        });
-
-        invertMenuitem.addEventListener("command", function () {
-            myPrefmanager.setPref("invertedTabBackground", this.hasAttribute("checked"));
-        });
-        notificationbarMenuitem.addEventListener("command", function () {
-            myPrefmanager.setPref("notificationbarOnBottom", this.hasAttribute("checked"));
-        });
-
-        menu.appendChild(menuPopup);
-        menuPopup.appendChild(invertMenuitem);
-        menuPopup.appendChild(notificationbarMenuitem);
-        container.insertBefore(menu, container_spacer);
     }
 
     function restoreDefaultSettings(event) {
@@ -197,32 +145,6 @@ let ToolbarPositionChanger = (function () {
         if (object[original]) {
             object[method] = object[original];
             delete object[original];
-        }
-    }
-
-    function removeElementById(window, id) {
-        let element = window.document.getElementById(id);
-        if (element) {
-            element.parentNode.removeChild(element);
-        }
-    }
-
-    function createElement(window, type, attributes) {
-        let element = window.document.createElement(type);
-        for (let attribute in attributes) {
-            element.setAttribute(attribute, attributes[attribute]);
-        }
-        return element;
-    }
-
-    function setCheckboxState(checkbox, state) {
-        if (!checkbox) return;
-        if (state) {
-            checkbox.setAttribute("checkState", 1);
-            checkbox.setAttribute("checked", true);
-        } else {
-            checkbox.removeAttribute("checked");
-            checkbox.removeAttribute("checkState");
         }
     }
 
@@ -448,7 +370,6 @@ let ToolbarPositionChanger = (function () {
         window.addEventListener("beforecustomization", customizationStart);
         window.addEventListener("aftercustomization", customizationEnd);
         window.addEventListener("toolbarPositionChange", saveState);
-        addOptionsMenu(window);
         invertTabBackground(window);
         notificationbarOnBottom(window);
         let resetButton = window.document.getElementById("customization-reset-button");
@@ -526,7 +447,6 @@ let ToolbarPositionChanger = (function () {
         if (undoButton) {
             undoButton.removeEventListener("click", undoSettings);
         }
-        removeElementById(window, "customization-toolbar-settings-button");
         invertTabBackground(window, false);
         notificationbarOnBottom(window, false);
         restoreMethod(window, "getTogglableToolbars");
