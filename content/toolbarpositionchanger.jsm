@@ -105,7 +105,7 @@ let ToolbarPositionChanger = (function () {
 
         if (!mainwindow) return;
 
-        if (mainwindow.getAttribute("lwthemetextcolor") == "bright") {
+        if (mainwindow.hasAttribute("lwthemetextcolor")) {
             for (let toolbar of toolbars)
                 toolbar.setAttribute("brighttext", "true");
         } else {
@@ -467,9 +467,9 @@ let ToolbarPositionChanger = (function () {
                     && !node.id.startsWith("ctraddon"));
             return original.concat(toolbarNodes);
         });
+        loadSavedState(window);
         addTitlebarPlaceholders(window);
         setBrighttextBottom(window);
-        loadSavedState(window);
         
         // Fix autocomplete panel position when navbar on bottom (Fx +48)
         let panel = window.document.getElementById("PopupAutoCompleteRichResult");
