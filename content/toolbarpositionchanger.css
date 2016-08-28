@@ -24,11 +24,13 @@
     toolbar[customizing] {
         margin: 0!important;
         padding-left: 6px!important;
-        background-color: rgb(236, 236, 236);
         -moz-appearance: none!important;
         background-clip: padding-box;
         border-width: 0!important;
         transition: opacity .6s ease-out!important;
+    }
+    toolbar[customizing]:not(:-moz-lwtheme) {
+        background-color: -moz-Dialog;
     }
     toolbar[dragged] {
         opacity: 0.4;
