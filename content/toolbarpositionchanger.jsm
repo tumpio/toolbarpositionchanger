@@ -431,6 +431,15 @@ let ToolbarPositionChanger = (function () {
 
         // Fullscreen
         window.addEventListener("fullscreen", onFullscreen);
+        
+        // Load style sheets
+        if (window instanceof Ci.nsIInterfaceRequestor) {
+            let winUtils = window.getInterface(Ci.nsIDOMWindowUtils);
+            let ios = Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null, null);
+            winUtils.loadSheet(uri, Ci.nsIDOMWindowUtils.AUTHOR_SHEET);
+        }
     }
 
     function unloadFromWindow(window) {
@@ -472,6 +481,17 @@ let ToolbarPositionChanger = (function () {
 
         // Fullscreen
         window.removeEventListener("fullscreen", onFullscreen);
+        
+        // Remove style sheets
+        if (window instanceof Ci.nsIInterfaceRequestor) {
+            let winUtils = window.getInterface(Ci.nsIDOMWindowUtils);
+            let ios = Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null, null);
+            let uri2 = ios.newURI("chrome://toolbarpositionchanger/content/pdfviewer.css", null, null);
+            winUtils.remove(uri, Ci.nsIDOMWindowUtils.AUTHOR_SHEET);
+            winUtils.remove(uri2, Ci.nsIDOMWindowUtils.AUTHOR_SHEET);
+        }
     }
 
     let windowListener = {
@@ -494,15 +514,6 @@ let ToolbarPositionChanger = (function () {
             wm.addListener(windowListener);
             myPrefmanager.register();
             myObserver.register();
-
-            let sss = Components.classes["@mozilla.org/content/style-sheet-service;1"]
-                .getService(Components.interfaces.nsIStyleSheetService);
-            let ios = Components.classes["@mozilla.org/network/io-service;1"]
-                .getService(Components.interfaces.nsIIOService);
-            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null,
-                null);
-            if (!sss.sheetRegistered(uri, sss.USER_SHEET))
-                sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
         },
 
         unload: function () {
@@ -511,15 +522,6 @@ let ToolbarPositionChanger = (function () {
             let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
             wm.removeListener(windowListener);
             forAllWindows(unloadFromWindow);
-
-            let sss = Components.classes["@mozilla.org/content/style-sheet-service;1"]
-                .getService(Components.interfaces.nsIStyleSheetService);
-            let ios = Components.classes["@mozilla.org/network/io-service;1"]
-                .getService(Components.interfaces.nsIIOService);
-            let uri = ios.newURI("chrome://toolbarpositionchanger/content/toolbarpositionchanger.css", null,
-                null);
-            if (sss.sheetRegistered(uri, sss.USER_SHEET))
-                sss.unregisterSheet(uri, sss.USER_SHEET);
         }
     };
 })();
