@@ -1,3 +1,9 @@
+Toolbar Position Changer v0.2.7 (released 2016-08-28)
+    -  Fix bright icon theme not loading for bottom toolbars.
+    -  Fix navbar toolbar color in customize view.
+    -  Change toolbar options to inline options.
+    -  Change to use nsIDOMWindowUtils to load style sheets.
+       
 Toolbar Position Changer v0.2.6 (released 2016-08-23)
     -  Fix two compatibility problems with CTR addon: main menu not opening and
        showing some duplicate toolbars in show/hide toolbars menu.
