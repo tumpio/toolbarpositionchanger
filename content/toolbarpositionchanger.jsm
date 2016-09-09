@@ -385,7 +385,7 @@ let ToolbarPositionChanger = (function () {
             let toolbarNodes = Array.slice(bottombox.childNodes);
             toolbarNodes = toolbarNodes.filter(
                 node => node.getAttribute("toolbarname")
-                    && !node.id.startsWith("ctraddon"));
+                    && !original.includes(node));
             return original.concat(toolbarNodes);
         });
         loadSavedState(window);
