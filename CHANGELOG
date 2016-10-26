@@ -1,3 +1,7 @@
+Toolbar Position Changer v0.2.9 (released 2016-10-26)
+    -  Fix tabs toolbar drag with tabs in titlebar.
+    -  Fix toolbar drag on FX 51+.
+    
 Toolbar Position Changer v0.2.8 (released 2016-09-09)
     -  Fix duplicate toolbars in Waterfox hide/show toolbar menu.
        
