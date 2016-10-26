@@ -199,4 +199,10 @@
         -moz-appearance: none !important;
         border-style: none !important;
     }
+    /* Prevent Window drag on toolbar when customize mode */
+    #main-window[tabsintitlebar][customizing] #TabsToolbar,
+    #main-window[tabsintitlebar][customizing] #toolbar-menubar,
+    #main-window[tabsintitlebar][customizing] #navigator-toolbox > toolbar:-moz-lwtheme {
+      -moz-window-dragging: initial!important;
+    }
 }
