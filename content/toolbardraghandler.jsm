@@ -48,7 +48,7 @@ let ToolbarDragHandler = (function () {
 
         grip.addEventListener("dragend",
             function (event) {
-                if (!event.dataTransfer.types.contains("application/x-toolbar"))
+                if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
                     return true;
                 let draggedToolbar = event.dataTransfer.mozGetDataAt("application/x-toolbar", 0);
                 draggedToolbar.removeAttribute("dragged");
@@ -65,7 +65,7 @@ let ToolbarDragHandler = (function () {
     }
 
     function onDragEnterToolbar(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
 
         let draggedToolbar = event.dataTransfer.mozGetDataAt("application/x-toolbar", 0);
@@ -78,7 +78,7 @@ let ToolbarDragHandler = (function () {
     }
 
     function onDragOverToolbar(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
 
         let draggedToolbar = event.dataTransfer.mozGetDataAt("application/x-toolbar", 0);
@@ -110,26 +110,26 @@ let ToolbarDragHandler = (function () {
     }
 
     function onDragLeaveToolbar(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
         event.currentTarget.removeAttribute("dragover");
         event.preventDefault();
     }
 
     function onDragEnterArea(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
         event.preventDefault();
     }
 
     function onDragOverArea(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
         event.preventDefault();
     }
 
     function onDropToToolbar(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
 
         let droppedToolbar = event.dataTransfer.mozGetDataAt("application/x-toolbar", 0);
@@ -149,7 +149,7 @@ let ToolbarDragHandler = (function () {
     }
 
     function onDropToArea(event) {
-        if (!event.dataTransfer.types.contains("application/x-toolbar"))
+        if (!event.dataTransfer.mozTypesAt(0).contains("application/x-toolbar"))
             return true;
         let droppedToolbar = event.dataTransfer.mozGetDataAt("application/x-toolbar", 0);
         event.currentTarget.appendChild(droppedToolbar);
