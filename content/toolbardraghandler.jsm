@@ -16,6 +16,7 @@
 */
 
 var EXPORTED_SYMBOLS = ["ToolbarDragHandler"];
+const excludedToolbars = ["addon-bar", "aios-toolbar", "aios-sbhtoolbar"];
 
 let ToolbarDragHandler = (function () {
 
@@ -187,7 +188,7 @@ let ToolbarDragHandler = (function () {
                     toolbox.addEventListener("dragenter", onDragEnterArea);
                     toolbox.addEventListener("dragover", onDragOverArea);
                     toolbox.addEventListener("drop", onDropToArea);
-                    toolbarSelector += "#" + toolbox.id + " toolbar:not(#addon-bar),";
+                    toolbarSelector += "#" + toolbox.id + " toolbar,";
                 }
             }
             toolbarSelector = toolbarSelector.slice(0, -1);
@@ -195,6 +196,9 @@ let ToolbarDragHandler = (function () {
             let toolbars = window.document.querySelectorAll(toolbarSelector);
 
             for (let toolbar of toolbars) {
+                if (excludedToolbars.includes(toolbar.id)) {
+                    continue;
+                }
                 toolbar.appendChild(toolbarGrip(window, toolboxes));
                 toolbar.addEventListener("dragenter", onDragEnterToolbar);
                 toolbar.addEventListener("dragover", onDragOverToolbar);
@@ -212,7 +216,7 @@ let ToolbarDragHandler = (function () {
                     toolbox.removeEventListener("dragenter", onDragEnterArea);
                     toolbox.removeEventListener("dragover", onDragOverArea);
                     toolbox.removeEventListener("drop", onDropToArea);
-                    toolbarSelector += "#" + toolbox.id + " toolbar:not(#addon-bar),";
+                    toolbarSelector += "#" + toolbox.id + " toolbar,";
                 }
             }
             toolbarSelector = toolbarSelector.slice(0, -1);
@@ -220,6 +224,9 @@ let ToolbarDragHandler = (function () {
             let toolbars = window.document.querySelectorAll(toolbarSelector);
 
             for (let toolbar of toolbars) {
+                if (excludedToolbars.includes(toolbar.id)) {
+                    continue;
+                }
                 toolbar.removeEventListener("dragenter", onDragEnterToolbar);
                 toolbar.removeEventListener("dragover", onDragOverToolbar);
                 toolbar.removeEventListener("dragleave", onDragLeaveToolbar);
