@@ -53,6 +53,14 @@
         </em:localized>
         <em:localized>
             <Description>
+                <em:locale>es</em:locale>
+                <em:name>Toolbar Position Changer</em:name>
+                <em:description>Un complemento para cambiar las posiciones de la barra de herramientas arrastrando y soltando.</em:description>
+                <em:translator>[es] strel</em:translator>
+            </Description>
+        </em:localized>
+        <em:localized>
+            <Description>
                 <em:locale>fi</em:locale>
                 <em:name>Toolbar Position Changer</em:name>
                 <em:description>Lisäosa työkalupalkkien sijaintien muuttamiseen raahaamalla ja pudottamalla.</em:description>
