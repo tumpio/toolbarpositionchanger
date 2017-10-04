@@ -1,5 +1,6 @@
 content     toolbarpositionchanger	         content/
 locale      toolbarpositionchanger en-US     locale/en-US/
+locale      toolbarpositionchanger es        locale/es/
 locale      toolbarpositionchanger fi        locale/fi/
 locale      toolbarpositionchanger fr        locale/fr/
 locale      toolbarpositionchanger nl        locale/nl/
