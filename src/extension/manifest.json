@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.3.0-alpha",
+  "default_locale": "en",
+  "applications": {
+    "gecko": {
+      "id": "toolbarpositionchanger@tumpio.addons.mozilla.org"
+    }
+  },
+  "icons": {
+    "31": "icon.png"
+  },
+  "permissions": ["experiments.toolbar", "storage"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  }
+}

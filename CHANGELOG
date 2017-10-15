@@ -1,3 +1,9 @@
+Toolbar Position Changer v0.3.0-alpha (unreleased)
+    - Re-write extension as WebExtension.
+    - Implement experiment WebExtension Toolbar API.
+    - Add toolbar hiding support.
+    - Change license to MPL2.
+
 Toolbar Position Changer v0.2.11 (released 2017-10-06)
     -  Add Spanish locale.
 

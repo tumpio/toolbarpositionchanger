@@ -1,0 +1,26 @@
+{
+  "extensionName": {
+    "message": "Toolbar Position Changer"
+  },
+  "extensionDescription": {
+    "message": "A Firefox extension to change the vertical position of toolbars."
+  },
+  "topToolbars": {
+    "message": "Top toolbars"
+  },
+  "bottomToolbars": {
+    "message": "Bottom toolbars"
+  },
+  "toolbar-menubar": {
+    "message": "Menu Bar"
+  },
+  "PersonalToolbar": {
+    "message": "Bookmarks Toolbar"
+  },
+  "nav-bar": {
+    "message": "Navigation Toolbar"
+  },
+  "TabsToolbar": {
+    "message": "Tabs Toolbar"
+  }
+}

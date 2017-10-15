@@ -1,0 +1,28 @@
+{
+  "name": "toolbarpositionchanger",
+  "version": "0.3.0-1",
+  "description": "A Firefox extension for advanced browser toolbar configuration.",
+  "main": "src/extension/background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tumpio/toolbarpositionchanger.git"
+  },
+  "keywords": [
+    "webextension"
+  ],
+  "author": "tumpio",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tumpio/toolbarpositionchanger/issues"
+  },
+  "homepage": "https://github.com/tumpio/toolbarpositionchanger#readme",
+  "dependencies": {
+    "html5sortable": "^0.6.3"
+  },
+  "devDependencies": {
+    "web-ext": "^2.2.2"
+  }
+}

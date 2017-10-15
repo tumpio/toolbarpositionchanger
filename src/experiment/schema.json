@@ -1,0 +1,103 @@
+[
+  {
+    "namespace": "toolbar",
+    "description": "Toolbar API",
+    "permissions": ["experiments.toolbar"],
+    "types": [
+      {
+        "id": "Toolbar",
+        "type": "object",
+        "description": "Toolbar info type.",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "index": {
+            "type": "number"
+          },
+          "bottom": {
+            "type": "boolean"
+          },
+          "hidden": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "id": "moveProperties",
+        "type": "object",
+        "description": "Toolbar move properties type.",
+        "properties": {
+          "index": {
+            "type": "number"
+          },
+          "bottom": {
+            "type": "boolean",
+            "optional": true
+          }
+        }
+      }
+    ],
+    "functions": [
+      {
+        "name": "hide",
+        "type": "function",
+        "description": "Hide toolbar",
+        "async": true,
+        "parameters": [
+          {
+            "name": "toolbarId",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "show",
+        "type": "function",
+        "description": "Show toolbar.",
+        "async": true,
+        "parameters": [
+          {
+            "name": "toolbarId",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "move",
+        "type": "function",
+        "description": "Move toolbar to a position given as toolbar.moveProperties.",
+        "async": true,
+        "parameters": [
+          {
+            "name": "toolbarId",
+            "type": "string"
+          },
+          {
+            "name": "moveProperties",
+            "$ref": "moveProperties"
+          }
+        ]
+      },
+      {
+        "name": "get",
+        "type": "function",
+        "description": "Get toolbar by toolbar Id",
+        "async": true,
+        "parameters": [
+          {
+            "name": "toolbarId",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "getAll",
+        "type": "function",
+        "description": "Get all toolbars in the browser window",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+.panel-list-item,
+.sortable-placeholder {
+    border: 1px solid #d7d7db;
+    margin-bottom: -1px;
+    padding: 16px;
+}
+
+.grip {
+    margin-left: -.3em;
+    margin-right: .6em;
+}
+
+.visible {
+    right: 2.5em;
+    position: absolute;
+}
+
+.panel-list-item,
+.title {
+    cursor: pointer;
+}
+
+.title {
+    margin-left: .6em;
+}
+
+.sortable-placeholder {
+    background: #f9f9fa;
+}
+
+.models {
+    display: none;
+}
